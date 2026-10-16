@@ -6,7 +6,7 @@ def test_creation_d_un_trajet(db):
         conducteur ="dieudonné",
         ville_depart = "Sokodé",
         ville_arrive = "Lomé",
-        date_depart = "2026-20-17",
+        date_depart = "2026-10-17",
         heure_depart = "18:00",
         places = 4,
         prix_place=3000
@@ -29,8 +29,23 @@ def test_trajet_propose_au_moin_une_place(db):
             conducteur ="dieudonné",
             ville_depart = "Sokodé",
             ville_arrive = "Lomé",
-            date_depart = "2026-20-17",
+            date_depart = "2026-10-17",
             heure_depart = "18:00",
             places = 0,
             prix_place=3000
         )
+
+def test_affichage_d_un_trajet(db):
+
+    trajet = Trajet.objects.create(
+        conducteur ="dieudonné",
+        ville_depart = "Sokodé",
+        ville_arrive = "Lomé",
+        date_depart = "2026-10-17",
+        heure_depart = "18:00",
+        places = 0,
+        prix_place=3000
+    )
+
+    assert str(trajet) == "Sokodé -> Lomé, le 14/11/2026 à 07:00"
+
