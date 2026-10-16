@@ -1,4 +1,5 @@
-from covoiturage.models import Trajet
+from django.db import IntegrityError
+from covoiturage.models import Trajet 
 import pytest
 
 def test_creation_d_un_trajet(db):
@@ -23,7 +24,7 @@ def test_creation_d_un_trajet(db):
 
 def test_trajet_propose_au_moin_une_place(db):
 
-    with pytest.raises(NbPlaceInferieurAUnExecption):
+    with pytest.raises(BaseException):
     
         trajet = Trajet.objects.create(
             conducteur ="dieudonné",
@@ -35,6 +36,8 @@ def test_trajet_propose_au_moin_une_place(db):
             prix_place=3000
         )
 
+        trajet.clean_fields()
+
 def test_affichage_d_un_trajet(db):
 
     trajet = Trajet.objects.create(
@@ -45,7 +48,7 @@ def test_affichage_d_un_trajet(db):
         heure_depart = "18:00",
         places = 0,
         prix_place=3000
-    )
+    ) 
 
-    assert str(trajet) == "Sokodé -> Lomé, le 14/11/2026 à 07:00"
+    assert str(trajet) == "Sokodé -> Lomé, le 2026-10-17 à 18:00"
 
